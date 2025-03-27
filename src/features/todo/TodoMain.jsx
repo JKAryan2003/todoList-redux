@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import DisplayTodo from './DisplayTodo'
 import AddTodo from './AddTodo'
 import { addTask, deleteTask, updateTask } from './todoSlice'
+import EditTodo from './EditTodo'
 
 const TodoMain = () => {
   const todos = useSelector((state) => state.todo.todos)  
@@ -42,14 +43,20 @@ const TodoMain = () => {
     dispatch(updateTask(index))
   }
 
+  const toggleEdit = (id) => {
+    setIsEditing(true)
+  }
+  console.log(isEditing);
+  
+
   return (
     <>
       <h1>Todo List</h1>
       <AddTodo addTodo={addTodo}/>
       {todos.map((todo, index) => 
       isEditing ? 
-      null : 
-      (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask}/>))}
+      (<EditTodo toggleEdit={toggleEdit} todo={todo}/>) : 
+      (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask} toggleEdit={toggleEdit}/>))}
     </>
   )
 }

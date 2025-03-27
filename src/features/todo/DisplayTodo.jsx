@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { editTask } from './todoSlice'
 
-const DisplayTodo = ({ todo, deleteTodo, toggleTask }) => {
+const DisplayTodo = ({ todo, deleteTodo, toggleTask, toggleEdit }) => {
 
   const dispatch = useDispatch()
   return (
@@ -11,7 +12,7 @@ const DisplayTodo = ({ todo, deleteTodo, toggleTask }) => {
       </div>
 
       <div className='col-md-3'>
-        <button className='btn text-info fs-4'><i class="bi bi-pencil-fill"></i></button>
+        <button className='btn text-info fs-4' onClick={() => toggleEdit(todo.id)}><i class="bi bi-pencil-fill"></i></button>
       </div>
 
       <div className='col-md-3'>
