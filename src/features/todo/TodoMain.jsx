@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DisplayTodo from './DisplayTodo'
 import AddTodo from './AddTodo'
-import { addTask, deleteTask, updateTask } from './todoSlice'
+import { addTask, deleteTask, updateTask, editTask } from './todoSlice'
 import EditTodo from './EditTodo'
 
 const TodoMain = () => {
@@ -17,7 +17,8 @@ const TodoMain = () => {
       {
         id: Date.now(),
         task: task,
-        complete: false
+        complete: false,
+        isEditing: false
     }))
   }
 
@@ -46,8 +47,21 @@ const TodoMain = () => {
   const toggleEdit = (id) => {
     setIsEditing(true)
   }
-  console.log(isEditing);
-  
+
+  const editTodo = (id, value) => {
+    let findTask = {}
+    todos.forEach(todo => {
+      if (todo.id == id) {
+        findTask =  todo
+      }
+    });
+    let index = todos.indexOf(findTask)
+    dispatch(editTask({
+      id: index,
+      value: value
+    }))
+    setIsEditing(false)
+  }
 
   return (
     <>
@@ -55,7 +69,7 @@ const TodoMain = () => {
       <AddTodo addTodo={addTodo}/>
       {todos.map((todo, index) => 
       isEditing ? 
-      (<EditTodo toggleEdit={toggleEdit} todo={todo}/>) : 
+      (<EditTodo toggleEdit={toggleEdit} todo={todo} editTodo={editTodo}/>) : 
       (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask} toggleEdit={toggleEdit}/>))}
     </>
   )

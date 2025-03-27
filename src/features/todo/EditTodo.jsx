@@ -16,7 +16,7 @@ const EditTodo = ({ editTodo, todo }) => {
       </div>
 
       <div className="col-md-3">
-        <button  className="btn text-info fs-4"><i class="bi bi-check-circle-fill"></i></button>
+        <button onClick={() => editTodo(todo.id, value)} className="btn text-info fs-4"><i class="bi bi-check-circle-fill"></i></button>
       </div>
 
       <div className="col-md-3">
