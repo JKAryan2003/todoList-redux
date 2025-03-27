@@ -7,7 +7,7 @@ const DisplayTodo = ({ todo, deleteTodo }) => {
   return (
     <div className="row shadow p-3 m-5 rounded">
       <div className='col-md-6 fs-5'>
-        <span >{todo.task}</span>
+        <span onClick={() => toggleTask(todo.id)} className={ (todo.complete)? 'strike' : ''}>{todo.task}</span>
       </div>
 
       <div className='col-md-3'>
