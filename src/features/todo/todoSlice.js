@@ -21,7 +21,11 @@ const todoSlice = createSlice({
       state.todos.splice(action.payload, 1)
     },
     updateTask: (state, action) => {
-
+      if (state.todos[action.payload].complete){
+        state.todos[action.payload].complete = false
+      } else {
+        state.todos[action.payload].complete = true
+      }
     },
     editTask: (state, action) => {
 

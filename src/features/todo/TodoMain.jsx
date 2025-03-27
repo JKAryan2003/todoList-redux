@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DisplayTodo from './DisplayTodo'
 import AddTodo from './AddTodo'
-import { addTask, deleteTask } from './todoSlice'
+import { addTask, deleteTask, updateTask } from './todoSlice'
 
 const TodoMain = () => {
   const todos = useSelector((state) => state.todo.todos)  
@@ -49,7 +49,7 @@ const TodoMain = () => {
       {todos.map((todo, index) => 
       isEditing ? 
       null : 
-      (<DisplayTodo todo={todo} deleteTodo={deleteTodo}/>))}
+      (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask}/>))}
     </>
   )
 }
