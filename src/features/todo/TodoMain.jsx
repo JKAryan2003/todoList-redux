@@ -1,11 +1,28 @@
 import React from 'react'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import DisplayTodo from './DisplayTodo'
+import AddTodo from './AddTodo'
+import { add } from './todoSlice'
 
 const TodoMain = () => {
+  const todos = useSelector((state) => state.todo.todos)  
+  const dispatch = useDispatch()
+
+  const addTodo = (task) => {
+    dispatch(add(
+      {
+        id: Date.now(),
+        task: task,
+        complete: false
+    }))
+  }
+
   return (
     <>
       <h1>Todo List</h1>
-      <DisplayTodo />
+      <AddTodo addTodo={addTodo}/>
+      <DisplayTodo todos={todos}/>
     </>
   )
 }

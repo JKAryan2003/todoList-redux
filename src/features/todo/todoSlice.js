@@ -15,6 +15,8 @@ const todoSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
+      console.log(state.todos);
+      
       state.todos.push(action.payload)
     }
   }
