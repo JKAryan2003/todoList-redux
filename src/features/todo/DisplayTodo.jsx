@@ -1,19 +1,27 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { add } from './todoSlice'
+const DisplayTodo = ({todos}) => {
 
-const DisplayTodo = () => {
-  const todos = useSelector((state) => state.todo.todos)
-  console.log(todos);
-  
   const dispatch = useDispatch()
   return (
-    <div className="row shadow p-3 m-5 rounded">
+    <>
       {todos.map((todo) => {
         return (
-          <span>{todo.task}</span>
+          <>
+            <div className='row'>
+              <div className='col-md-8'>
+                <span>{todo.task}</span>
+              </div>
+
+              <div className='col-md-2'><button>Edit</button></div>
+
+              <div className='col-md-2'><button>Delete</button></div>
+            </div>
+          </>
         )
       })}
-    </div>
+    </>
   )
 }
 
