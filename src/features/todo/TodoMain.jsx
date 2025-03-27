@@ -8,6 +8,7 @@ import { add } from './todoSlice'
 const TodoMain = () => {
   const todos = useSelector((state) => state.todo.todos)  
   const dispatch = useDispatch()
+  const [isEditing, setIsEditing] = useState(false)
 
   const addTodo = (task) => {
     dispatch(add(
@@ -22,7 +23,10 @@ const TodoMain = () => {
     <>
       <h1>Todo List</h1>
       <AddTodo addTodo={addTodo}/>
-      <DisplayTodo todos={todos}/>
+      {todos.map((todo, index) => 
+      isEditing ? 
+      null : 
+      (<DisplayTodo todo={todo} />))}
     </>
   )
 }

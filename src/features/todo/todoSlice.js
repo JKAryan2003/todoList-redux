@@ -18,6 +18,9 @@ const todoSlice = createSlice({
       console.log(state.todos);
       
       state.todos.push(action.payload)
+    },
+    delete: (state, action) => {
+      state.todos.delete(action.payload)
     }
   }
 })
