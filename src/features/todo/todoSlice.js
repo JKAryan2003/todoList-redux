@@ -37,7 +37,7 @@ const todoSlice = createSlice({
       state.todos[action.payload.id].isEditing = false
     },
     cancelEdit: (state, action) => {
-      
+      state.todos[action.payload].isEditing = false
     }
   }
 })

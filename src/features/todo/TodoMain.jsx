@@ -53,8 +53,15 @@ const TodoMain = () => {
     dispatch(handleEdit(index))
   }
 
-  const handleCancel = () => {
-
+  const handleCancel = (id) => {
+    let findTask = {}
+    todos.forEach(todo => {
+      if (todo.id == id) {
+        findTask =  todo
+      }
+    });
+    let index = todos.indexOf(findTask)
+    dispatch(cancelEdit(index))
   }
 
   const editTodo = (id, value) => {
@@ -78,7 +85,7 @@ const TodoMain = () => {
       <AddTodo addTodo={addTodo}/>
       {todos.map((todo, index) => 
       todo.isEditing ? 
-      (<EditTodo toggleEdit={toggleEdit} todo={todo} editTodo={editTodo}/>) : 
+      (<EditTodo toggleEdit={toggleEdit} todo={todo} editTodo={editTodo} handleCancel={handleCancel}/>) : 
       (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask} toggleEdit={toggleEdit}/>))}
     </>
   )

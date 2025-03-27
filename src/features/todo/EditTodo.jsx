@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-const EditTodo = ({ editTodo, todo }) => {
+const EditTodo = ({ editTodo, todo, handleCancel }) => {
   const [value, setValue] = useState(todo.task)
   return (
     <div className="row p-3 m-5">
@@ -20,7 +20,7 @@ const EditTodo = ({ editTodo, todo }) => {
       </div>
 
       <div className="col-md-3">
-        <button  className="btn text-danger fs-4"><i class="bi bi-x-circle-fill"></i></button>
+        <button onClick={() => handleCancel(todo.id)} className="btn text-danger fs-4"><i class="bi bi-x-circle-fill"></i></button>
       </div>
     </div>
   )
