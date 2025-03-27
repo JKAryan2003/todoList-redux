@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-const DisplayTodo = ({ todo, deleteTodo }) => {
+const DisplayTodo = ({ todo, deleteTodo, toggleTask }) => {
 
   const dispatch = useDispatch()
   return (

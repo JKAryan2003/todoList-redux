@@ -7,7 +7,7 @@ import { addTask, deleteTask } from './todoSlice'
 
 const TodoMain = () => {
   const todos = useSelector((state) => state.todo.todos)  
-  
+
   const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
 
@@ -29,6 +29,17 @@ const TodoMain = () => {
     });
     let index = todos.indexOf(findTask)
     dispatch(deleteTask(index))
+  }
+
+  const toggleTask = (id) => {
+    let findTask = {}
+    todos.forEach(todo => {
+      if (todo.id == id) {
+        findTask =  todo
+      }
+    });
+    let index = todos.indexOf(findTask)
+    dispatch(updateTask(index))
   }
 
   return (
