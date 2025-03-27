@@ -29,17 +29,18 @@ const todoSlice = createSlice({
       }
     },
     handleEdit: (state, action) => {
-
+      state.todos[action.payload].isEditing = true
     },
     editTask: (state, action) => {
       console.log(action.payload);
       state.todos[action.payload.id].task = action.payload.value
+      state.todos[action.payload.id].isEditing = false
     },
     cancelEdit: (state, action) => {
-
+      
     }
   }
 })
 
 export default todoSlice.reducer
-export const { addTask, deleteTask, editTask, updateTask } = todoSlice.actions
+export const { addTask, deleteTask, editTask, updateTask, cancelEdit, handleEdit } = todoSlice.actions

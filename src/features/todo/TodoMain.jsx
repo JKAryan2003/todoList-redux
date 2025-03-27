@@ -3,14 +3,12 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import DisplayTodo from './DisplayTodo'
 import AddTodo from './AddTodo'
-import { addTask, deleteTask, updateTask, editTask } from './todoSlice'
+import { addTask, deleteTask, updateTask, editTask, handleEdit, cancelEdit } from './todoSlice'
 import EditTodo from './EditTodo'
 
 const TodoMain = () => {
   const todos = useSelector((state) => state.todo.todos)  
-
   const dispatch = useDispatch()
-  const [isEditing, setIsEditing] = useState(false)
 
   const addTodo = (task) => {
     dispatch(addTask(
@@ -45,7 +43,18 @@ const TodoMain = () => {
   }
 
   const toggleEdit = (id) => {
-    setIsEditing(true)
+    let findTask = {}
+    todos.forEach(todo => {
+      if (todo.id == id) {
+        findTask =  todo
+      }
+    });
+    let index = todos.indexOf(findTask)
+    dispatch(handleEdit(index))
+  }
+
+  const handleCancel = () => {
+
   }
 
   const editTodo = (id, value) => {
@@ -60,7 +69,7 @@ const TodoMain = () => {
       id: index,
       value: value
     }))
-    setIsEditing(false)
+ 
   }
 
   return (
@@ -68,7 +77,7 @@ const TodoMain = () => {
       <h1>Todo List</h1>
       <AddTodo addTodo={addTodo}/>
       {todos.map((todo, index) => 
-      isEditing ? 
+      todo.isEditing ? 
       (<EditTodo toggleEdit={toggleEdit} todo={todo} editTodo={editTodo}/>) : 
       (<DisplayTodo todo={todo} deleteTodo={deleteTodo} toggleTask={toggleTask} toggleEdit={toggleEdit}/>))}
     </>
